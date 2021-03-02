@@ -52,7 +52,7 @@ typedef struct {
 
 ADCStructure ADCChannel[2] = { 0 };
 
-float ADCOutputConverted = 0;
+double ADCOutputConverted = 0;
 uint8_t ADCMode = 0 ;
 /* USER CODE END PV */
 
@@ -102,6 +102,7 @@ int main(void)
   MX_USART2_UART_Init();
   MX_ADC1_Init();
   /* USER CODE BEGIN 2 */
+  ADCPollingMethodInit();
 uint8_t Button[2]={0};
   /* USER CODE END 2 */
 
@@ -131,11 +132,11 @@ uint8_t Button[2]={0};
 	  if(ADCMode == 0)
 	  {
 
-		  ADCOutputConverted =((ADCChannel[0].data* 3.3)/ 4096)/0.001;
+		  ADCOutputConverted =((ADCChannel[0].data* 3.3)/ 4096.0)/0.001;
 	  }
 	  else
 	  {
-		  ADCOutputConverted=(((((ADCChannel[1].data* 3.3)/ 4096)/0.001)-760)/2.5)+25;
+		  ADCOutputConverted=(((((ADCChannel[1].data* 3.3)/ 4096.0)/0.001)-760.0)/2.5)+25.0;
 	  }
   }
   /* USER CODE END 3 */
@@ -323,7 +324,7 @@ void ADCPollingMethodUpdate() {
 		HAL_ADC_Start(&hadc1);
 
 		if(HAL_ADC_PollForConversion(&hadc1, 10)==HAL_OK){
-			//à¸?à¸±à¸?CPUà¸£à¸­à¸?à¸²à¸?à¹€à¸?à¸´à¸?à¹?à¸?,à¸–à¹?à¸²CPUà¸£à¸­à¸?à¸²à¸?à¹?à¸¡à¹?à¹€à¸?à¸´à¸?10ms à¸?à¸° return HAL_K
+			//ï¿½?à¸±ï¿½?CPUà¸£à¸­ï¿½?à¸²ï¿½?à¹€ï¿½?à¸´ï¿½?ï¿½?ï¿½?,à¸–ï¿½?à¸²CPUà¸£à¸­ï¿½?à¸²ï¿½?ï¿½?à¸¡ï¿½?à¹€ï¿½?à¸´ï¿½?10ms ï¿½?à¸° return HAL_K
 
 			//Get value
 		ADCChannel[i].data = HAL_ADC_GetValue(&hadc1);
