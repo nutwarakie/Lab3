@@ -52,7 +52,7 @@ typedef struct {
 
 ADCStructure ADCChannel[2] = { 0 };
 
-double ADCOutputConverted = 0;
+float ADCOutputConverted = 0;
 uint8_t ADCMode = 0 ;
 /* USER CODE END PV */
 
